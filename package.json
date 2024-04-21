@@ -1,0 +1,29 @@
+{
+    "name": "nuxt-app",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "concurrently \"nuxt dev\" \"cloudflared tunnel run dvm\"",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare"
+    },
+    "dependencies": {
+        "@discord/embedded-app-sdk": "^1.1.2",
+        "@hyperbeam/web": "^0.0.35",
+        "arctic": "^1.5.0",
+        "nuxt": "^3.11.2",
+        "pinia": "^2.1.7",
+        "radix-vue": "^1.7.1",
+        "vue": "^3.4.21",
+        "vue-router": "^4.3.0",
+        "zod": "^3.22.5"
+    },
+    "devDependencies": {
+        "@nuxtjs/tailwindcss": "^6.12.0",
+        "@pinia/nuxt": "^0.5.1",
+        "concurrently": "^8.2.2",
+        "discord.js": "^14.14.1"
+    }
+}
