@@ -25,7 +25,17 @@ export default defineEventHandler(async (event) => {
     })
 
     const session = createSession({
-        tag: channelId,
+        tag: `${import.meta.dev ? 'dev' : 'prod'}:${channelId}`,
+        ublock: true,
+        default_roles: ['control', 'clipboard_copy', 'cursor_data'],
+        hide_cursor: true,
+        timeout: {
+            offline: 0,
+            webhook: {
+                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/timeout`,
+                bearer: process.env.HYPERBEAM_TOKEN!,
+            },
+        },
     })
 
     return session

@@ -20,10 +20,18 @@ interface SessionOptions {
         offline?: number
         warning?: number
         webhook?: {
-            url?: string
-            bearer?: string
+            url: string
+            bearer: string
         }
     }
+    auth?: {
+        type: 'webhook'
+        value: {
+            url: string
+            bearer: string
+        }
+    }
+    default_roles?: string[]
     control_disable_default?: boolean
     region?: 'NA' | 'EU' | 'AS'
     profile?: {

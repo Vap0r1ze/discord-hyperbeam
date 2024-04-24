@@ -1,6 +1,4 @@
 <<script setup lang="ts">
-import Hyperbeam from '@hyperbeam/web'
-
 const { $discord } = useNuxtApp()
 const instanceStore = useInstanceStore()
 
@@ -21,23 +19,19 @@ const embedUrl = computed(() => {
     return `/vm/${id1}/${id2}${url.search}`
 })
 
-const containerRef = ref<HTMLDivElement | null>(null)
-const { data: hb, status: hbStatus } = useAsyncData(async () => {
-    if (embedUrl.value == null || containerRef.value == null) return
-    // @ts-ignore
-    window.RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection
-    return await Hyperbeam(containerRef.value, location.origin + embedUrl.value)
-}, {
-    watch: [embedUrl, containerRef],
-})
-
-onBeforeUnmount(() => {
-    hb.value?.destroy()
-})
+const { hb, container, cursors } = useHyperbeam(embedUrl)
 </script>
 
 <template>
-    <div v-if="session">
-        <div class="h-screen w-screen" ref="containerRef" />
+    <div class="relative overflow-clip" v-if="session">
+        <div class="h-screen w-screen" ref="container" />
+        <div
+            v-for="[userId, pos] in Object.entries(cursors)"
+            :key="userId"
+            :style="{ top: pos.y * 100 + '%', left: pos.x * 100 + '%' }"
+            class="absolute pointer-events-none"
+        >
+            <Icon name="tabler:pointer-filled" />
+        </div>
     </div>
 </template>

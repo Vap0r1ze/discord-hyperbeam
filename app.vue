@@ -4,7 +4,7 @@ import { Events } from '@discord/embedded-app-sdk';
 const { $discord, $config } = useNuxtApp()
 const instanceStore = useInstanceStore()
 
-const { status, progress, done, retry } = createRoutine()
+const initSdkRoutine = createRoutine()
     .add('connect', () => $discord.ready())
     .add('authorize', async () => {
         const { code } = await $discord.commands.authorize({
@@ -32,7 +32,8 @@ const { status, progress, done, retry } = createRoutine()
             instanceStore.participants = participants
         })
     })
-    .use()
+
+const { status, progress, done, retry } = initSdkRoutine.use()
 
 const failureMessage = computed(() => {
     if (status.value !== 'error') return null

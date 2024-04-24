@@ -6,12 +6,14 @@
         "build": "nuxt build",
         "dev": "concurrently \"nuxt dev\" \"cloudflared tunnel run dvm\"",
         "generate": "nuxt generate",
-        "preview": "nuxt preview",
+        "preview": "nuxt build && concurrently \"nuxt preview\" \"cloudflared tunnel run dvm\"",
         "postinstall": "nuxt prepare"
     },
     "dependencies": {
         "@discord/embedded-app-sdk": "^1.1.2",
         "@hyperbeam/web": "^0.0.35",
+        "@vueuse/core": "^10.9.0",
+        "@vueuse/nuxt": "^10.9.0",
         "arctic": "^1.5.0",
         "nuxt": "^3.11.2",
         "pinia": "^2.1.7",
@@ -24,6 +26,7 @@
         "@nuxtjs/tailwindcss": "^6.12.0",
         "@pinia/nuxt": "^0.5.1",
         "concurrently": "^8.2.2",
-        "discord.js": "^14.14.1"
+        "discord.js": "^14.14.1",
+        "nuxt-icon": "^0.6.10"
     }
 }
