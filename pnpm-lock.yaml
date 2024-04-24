@@ -26,6 +26,9 @@ dependencies:
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(vue@3.4.23)
+  pusher-js:
+    specifier: 8.4.0-rc2
+    version: 8.4.0-rc2
   radix-vue:
     specifier: ^1.7.1
     version: 1.7.1(vue@3.4.23)
@@ -52,6 +55,9 @@ devDependencies:
   discord.js:
     specifier: ^14.14.1
     version: 14.14.1
+  h3:
+    specifier: 1.11.1
+    version: 1.11.1
   nuxt-icon:
     specifier: ^0.6.10
     version: 0.6.10(nuxt@3.11.2)(vite@5.2.9)(vue@3.4.23)
@@ -5942,6 +5948,12 @@ packages:
   /protocols@2.0.1:
     resolution: {integrity: sha512-/XJ368cyBJ7fzLMwLKv1e4vLxOju2MNAIokcr7meSaNcVbWz/CPcW22cP04mwxOErdA5mwjA8Q6w/cdAQxVn7Q==}
 
+  /pusher-js@8.4.0-rc2:
+    resolution: {integrity: sha512-d87GjOEEl9QgO5BWmViSqW0LOzPvybvX6WA9zLUstNdB57jVJuR27zHkRnrav2a3+zAMlHbP2Og8wug+rG8T+g==}
+    dependencies:
+      tweetnacl: 1.0.3
+    dev: false
+
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -6689,6 +6701,10 @@ packages:
       make-fetch-happen: 13.0.0
     transitivePeerDependencies:
       - supports-color
+
+  /tweetnacl@1.0.3:
+    resolution: {integrity: sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==}
+    dev: false
 
   /type-fest@0.21.3:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}

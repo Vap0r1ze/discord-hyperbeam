@@ -21,10 +21,7 @@ export function useHyperbeam(embedUrl: NullishWatchable<string>, opts: Hyperbeam
         return await Hyperbeam(container.value, location.origin + embedUrl.value, {
             adminToken: opts.adminToken,
             webhookUserdata: {
-                discordId: instanceStore.auth.user.id,
-            },
-            onCursor: ({ x, y, userId }) => {
-                cursors.value = { ...cursors.value, [userId]: { x, y } }
+                discord_id: instanceStore.auth.user.id,
             },
         })
     }, {

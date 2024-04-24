@@ -1,6 +1,5 @@
 import { z } from "zod"
 import { createSession } from "../hyperbeam"
-import { discordHttp } from "../utils/discord"
 
 const joinBodySchema = z.object({
     accessToken: z.string(),
@@ -9,14 +8,7 @@ const joinBodySchema = z.object({
 })
 
 export default defineEventHandler(async (event) => {
-    const result = await readValidatedBody(event, body => joinBodySchema.safeParse(body))
-
-    if (!result.success) throw createError({
-        status: 400,
-        message: result.error.toString(),
-    })
-
-    const { accessToken, instanceId, channelId } = result.data
+    const { accessToken, instanceId, channelId } = await validateBody(event, joinBodySchema)
     const verified = await discordHttp.verifyInstance(accessToken, channelId, instanceId)
 
     if (!verified) throw createError({
@@ -32,22 +24,23 @@ export default defineEventHandler(async (event) => {
         timeout: {
             offline: 0,
             webhook: {
-                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/timeout`,
+                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/callback/hyperbeam/timeout`,
                 bearer: process.env.HYPERBEAM_TOKEN!,
             },
         },
         auth: {
             type: 'webhook',
             value: {
-                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/auth`,
+                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/callback/hyperbeam/auth`,
                 bearer: process.env.HYPERBEAM_TOKEN!,
             },
         },
     })
 
-    if (import.meta.dev) {
-        console.log('Session created: %s', session.session_id)
-    }
+    if (import.meta.dev) console.log('Session created: %s', session.session_id)
 
-    return session
+    return {
+        id: session.session_id,
+        embed: session.embed_url,
+    }
 })

@@ -17,6 +17,7 @@
         "arctic": "^1.5.0",
         "nuxt": "^3.11.2",
         "pinia": "^2.1.7",
+        "pusher-js": "8.4.0-rc2",
         "radix-vue": "^1.7.1",
         "vue": "^3.4.21",
         "vue-router": "^4.3.0",
@@ -27,6 +28,7 @@
         "@pinia/nuxt": "^0.5.1",
         "concurrently": "^8.2.2",
         "discord.js": "^14.14.1",
+        "h3": "1.11.1",
         "nuxt-icon": "^0.6.10"
     }
 }

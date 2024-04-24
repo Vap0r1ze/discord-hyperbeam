@@ -13,7 +13,7 @@ const { data: session, status: sessionStatus } = useFetch('/api/join', {
 
 const embedUrl = computed(() => {
     if (session.value == null) return null
-    const url = new URL(session.value.embed_url)
+    const url = new URL(session.value.embed)
     const [id1] = url.hostname.split('.')
     const id2 = url.pathname.slice(1)
     return `/vm/${id1}/${id2}${url.search}`

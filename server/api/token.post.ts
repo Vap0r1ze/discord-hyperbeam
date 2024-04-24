@@ -7,10 +7,8 @@ const bodySchema = z.object({
 })
 
 export default defineEventHandler(async (event) => {
-    const result = await readValidatedBody(event, body => bodySchema.safeParse(body))
+    const { code } = await validateBody(event, bodySchema)
+    const { accessToken } = await discord.validateAuthorizationCode(code)
 
-    if (!result.success) throw result.error.issues
-
-    const { accessToken } = await discord.validateAuthorizationCode(result.data.code)
     return { accessToken }
 })
