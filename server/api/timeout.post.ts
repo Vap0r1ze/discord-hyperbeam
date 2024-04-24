@@ -14,5 +14,9 @@ export default defineEventHandler(async (event) => {
         message: result.error.toString(),
     })
 
+    if (import.meta.dev) {
+        console.log('Session timed out: %s', result.data.session_id)
+    }
+
     return null
 })

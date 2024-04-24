@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
         message: 'You are not a part of this instance',
     })
 
-    const session = createSession({
+    const session = await createSession({
         tag: `${import.meta.dev ? 'dev' : 'prod'}:${channelId}`,
         ublock: true,
         default_roles: ['control', 'clipboard_copy', 'cursor_data'],
@@ -36,7 +36,18 @@ export default defineEventHandler(async (event) => {
                 bearer: process.env.HYPERBEAM_TOKEN!,
             },
         },
+        auth: {
+            type: 'webhook',
+            value: {
+                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/auth`,
+                bearer: process.env.HYPERBEAM_TOKEN!,
+            },
+        },
     })
+
+    if (import.meta.dev) {
+        console.log('Session created: %s', session.session_id)
+    }
 
     return session
 })

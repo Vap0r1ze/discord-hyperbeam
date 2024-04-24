@@ -12,11 +12,4 @@ export default defineNuxtConfig({
     },
 
     modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', '@vueuse/nuxt', 'nuxt-icon', 'radix-vue/nuxt'],
-    $development: {
-        icon: {
-            iconifyApiOptions: {
-                url: `https://${process.env.NUXT_PUBLIC_CLIENT_ID}.discordsays.com/_dev/iconify`,
-            },
-        },
-    },
 })

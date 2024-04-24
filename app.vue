@@ -46,7 +46,7 @@ const failureMessage = computed(() => {
 </script>
 
 <template>
-    <div>
+    <div @click="() => console.log('hi')">
         <div v-if="done">
             <Client />
         </div>
