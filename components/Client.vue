@@ -3,7 +3,7 @@ const { data: session, status: sessionStatus } = useFetch('/api/join', { method:
 </script>
 
 <template>
-    <div class="relative overflow-clip" v-if="session">
+    <div class="relative overflow-clip h-screen" v-if="session">
         <Hyperbeam :embed="session.embed" />
         <!-- <div
             v-for="[userId, pos] in Object.entries(cursors)"
