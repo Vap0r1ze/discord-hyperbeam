@@ -6,7 +6,7 @@ export function useDiscordConnect() {
     const { $discordSdk, $config } = useNuxtApp()
     const instanceStore = useInstanceStore()
 
-    patchUrlMappings($config.public.discord.proxyMappings)
+    // patchUrlMappings($config.public.discord.proxyMappings)
 
     const initSdkRoutine = createRoutine()
     .add('connect', () => $discordSdk.ready())

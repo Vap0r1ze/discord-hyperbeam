@@ -11,7 +11,7 @@ function patchEmbedUrl(embed: string) {
 
 <template>
     <div class="relative overflow-clip h-screen" v-if="session">
-        <Hyperbeam :embed="patchEmbedUrl(session.embed)" />
+        <Hyperbeam :embed="patchEmbedUrl(session.embed)" :adminToken="session.adminToken" />
         <!-- <div
             v-for="[userId, pos] in Object.entries(cursors)"
             :key="userId"

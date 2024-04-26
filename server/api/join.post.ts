@@ -16,14 +16,14 @@ export default defineEventHandler(async (event) => {
         timeout: {
             offline: 0,
             webhook: {
-                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/callback/hyperbeam/timeout`,
+                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/hyperbeam/timeout`,
                 bearer: process.env.HYPERBEAM_TOKEN!,
             },
         },
         auth: {
             type: 'webhook',
             value: {
-                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/callback/hyperbeam/auth`,
+                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/hyperbeam/auth`,
                 bearer: process.env.HYPERBEAM_TOKEN!,
             },
         },
@@ -34,5 +34,6 @@ export default defineEventHandler(async (event) => {
     return {
         id: session.session_id,
         embed: session.embed_url,
+        adminToken: session.admin_token,
     }
 })

@@ -3,6 +3,10 @@ export default defineNuxtConfig({
     devtools: { enabled: false },
     ssr: false,
 
+    nitro: {
+        errorHandler: '~/error',
+    },
+
     modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', 'nuxt-icon', 'radix-vue/nuxt'],
     pusher: {
         appId: process.env.PUSHER_APP_ID,
