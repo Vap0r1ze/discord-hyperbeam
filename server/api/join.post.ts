@@ -1,23 +1,15 @@
-import { z } from "zod"
 import { createSession } from "../hyperbeam"
 
-const joinBodySchema = z.object({
-    accessToken: z.string(),
-    instanceId: z.string().uuid(),
-    channelId: z.string().regex(/^\d{1,20}$/, 'Invalid snowflake'),
-})
-
 export default defineEventHandler(async (event) => {
-    const { accessToken, instanceId, channelId } = await validateBody(event, joinBodySchema)
-    const verified = await discordHttp.verifyInstance(accessToken, channelId, instanceId)
+    const token = await useInstanceToken(event, true)
 
-    if (!verified) throw createError({
+    if (!token) throw createError({
         status: 403,
         message: 'You are not a part of this instance',
     })
 
     const session = await createSession({
-        tag: `${import.meta.dev ? 'dev' : 'prod'}:${channelId}`,
+        tag: `${import.meta.dev ? 'dev' : 'prod'}:${token.channelId}`,
         ublock: true,
         default_roles: ['control', 'clipboard_copy', 'cursor_data'],
         hide_cursor: true,
