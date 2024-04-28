@@ -11,9 +11,6 @@ export function useHyperbeam(embedUrl: string, opts: HyperbeamOptions = {}) {
     const { data: hb, status } = useAsyncData(async () => {
         if (container.value == null) return
 
-        // @ts-ignore
-        window.RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection
-
         return await Hyperbeam(container.value, embedUrl, {
             adminToken: opts.adminToken ?? undefined,
             webhookUserdata: opts.webhookUserdata?.(),
