@@ -25,6 +25,9 @@ export default defineNuxtModule({
         addServerImports([{
             from: resolve('./runtime/server/handler'),
             name: 'defineHyperbeamHandler',
+        }, {
+            from: resolve('./runtime/server/api'),
+            name: 'createHyperbeamSession',
         }])
     },
 })

@@ -54,7 +54,7 @@ export function defineTokenHandler() {
     })
 }
 
-export async function useInstanceToken(event: H3Event, checkFreshness: boolean): Promise<InstanceToken | null> {
+export async function useInstanceToken(event: H3Event, checkFreshness = false): Promise<InstanceToken | null> {
     const $config = useRuntimeConfig(event)
 
     const token = getCookie(event, $config.discord.instanceTokenCookie)

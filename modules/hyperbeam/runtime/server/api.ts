@@ -11,7 +11,7 @@ function request(method: string, path: string, body?: object) {
     })
 }
 
-interface SessionOptions {
+interface SessionApiOptions {
     start_url?: string
     kiosk?: boolean
     timeout?: {
@@ -52,6 +52,12 @@ interface SessionOptions {
         mode?: 'sharp' | 'smooth'
     }
 }
+type SessionOptions = Omit<SessionApiOptions, 'auth' | 'timeout'> & {
+    timeout?: Omit<SessionApiOptions['timeout'] & {}, 'webhook'> & {
+        webhook?: boolean
+    }
+    auth?: boolean
+}
 
 interface Session {
     session_id: string
@@ -59,7 +65,25 @@ interface Session {
     admin_token: string
 }
 
-export async function createSession(options: SessionOptions) {
-    const response = await request('POST', '/vm', options)
+export async function createHyperbeamSession(options: SessionOptions) {
+    const response = await request('POST', '/vm', {
+        ...options,
+        auth: options.auth ? {
+            type: 'webhook',
+            value: {
+                // TODO: make this configurable
+                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/hyperbeam/auth`,
+                bearer: process.env.HYPERBEAM_TOKEN!,
+            },
+        } : undefined,
+        timeout: options.timeout && {
+            // TODO: make this configurable
+            ...options.timeout,
+            webhook: options.timeout.webhook ? {
+                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/hyperbeam/timeout`,
+                bearer: process.env.HYPERBEAM_TOKEN!,
+            }: undefined,
+        },
+    } satisfies SessionApiOptions)
     return await response.json() as Session
 }

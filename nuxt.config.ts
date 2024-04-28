@@ -12,10 +12,10 @@ export default defineNuxtConfig({
         appId: process.env.PUSHER_APP_ID,
         key: process.env.PUSHER_KEY,
         secret: process.env.PUSHER_SECRET,
-        cluster: 'us2',
+        host: process.env.PUSHER_HOST,
     },
     discordSdk: {
-        clientId: process.env.DISCORD_CLIENT_ID,
+        clientId: process.env.NUXT_PUBLIC_DISCORD_CLIENT_ID,
         clientSecret: process.env.DISCORD_CLIENT_SECRET,
         publicKey: process.env.DISCORD_PUBLIC_KEY,
         token: process.env.DISCORD_TOKEN,
@@ -23,6 +23,9 @@ export default defineNuxtConfig({
         proxyMappings: [{
             prefix: '/vm/{projectid}',
             target: '{projectid}.hyperbeam.com',
+        }, {
+            prefix: '/pusher',
+            target: process.env.PUSHER_HOST || 'ws-us2.pusher.com',
         }],
     },
     hyperbeam: {

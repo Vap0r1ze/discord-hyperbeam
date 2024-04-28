@@ -1,4 +1,4 @@
-import { Events, patchUrlMappings } from '@discord/embedded-app-sdk'
+import { Events } from '@discord/embedded-app-sdk'
 import { createRoutine } from './_routine'
 import { useInstanceStore } from './store'
 
@@ -6,7 +6,6 @@ export function useDiscordConnect() {
     const { $discordSdk, $config } = useNuxtApp()
     const instanceStore = useInstanceStore()
 
-    // patchUrlMappings($config.public.discord.proxyMappings)
 
     const initSdkRoutine = createRoutine()
     .add('connect', () => $discordSdk.ready())
