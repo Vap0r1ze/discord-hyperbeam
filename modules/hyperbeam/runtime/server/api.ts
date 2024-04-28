@@ -72,7 +72,7 @@ export async function createHyperbeamSession(options: SessionOptions) {
             type: 'webhook',
             value: {
                 // TODO: make this configurable
-                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/hyperbeam/auth`,
+                url: `https://${process.env.EXTERNAL_DOMAIN}/api/hyperbeam/auth`,
                 bearer: process.env.HYPERBEAM_TOKEN!,
             },
         } : undefined,
@@ -80,7 +80,7 @@ export async function createHyperbeamSession(options: SessionOptions) {
             // TODO: make this configurable
             ...options.timeout,
             webhook: options.timeout.webhook ? {
-                url: `https://${process.env.NUXT_PUBLIC_DOMAIN}/api/hyperbeam/timeout`,
+                url: `https://${process.env.EXTERNAL_DOMAIN}/api/hyperbeam/timeout`,
                 bearer: process.env.HYPERBEAM_TOKEN!,
             }: undefined,
         },
