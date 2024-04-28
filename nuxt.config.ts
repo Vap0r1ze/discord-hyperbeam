@@ -15,7 +15,7 @@ export default defineNuxtConfig({
         host: process.env.PUSHER_HOST,
     },
     discordSdk: {
-        clientId: process.env.NUXT_PUBLIC_DISCORD_CLIENT_ID,
+        clientId: process.env.VITE_DISCORD_CLIENT_ID,
         clientSecret: process.env.DISCORD_CLIENT_SECRET,
         publicKey: process.env.DISCORD_PUBLIC_KEY,
         token: process.env.DISCORD_TOKEN,
