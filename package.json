@@ -28,5 +28,10 @@
         "discord.js": "^14.14.1",
         "h3": "1.11.1",
         "nuxt-icon": "^0.6.10"
+    },
+    "pnpm": {
+        "patchedDependencies": {
+            "nuxt-icon@0.6.10": "patches/nuxt-icon@0.6.10.patch"
+        }
     }
 }
