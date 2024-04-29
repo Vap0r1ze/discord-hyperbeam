@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
         // auth: true,
     })
 
-    if (import.meta.dev) console.log('Session created: %s', session.session_id)
+    if (import.meta.dev) console.log('Session joined: %s', session.session_id)
 
     return {
         id: session.session_id,
